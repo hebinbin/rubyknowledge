@@ -20,3 +20,38 @@
       params.keys.include?(key.to_s)
     end
   end
+
+
+# how to use extend self in module
+module Foo
+
+  extend self
+
+  def foo_method
+    'foo_method'
+  end
+
+end
+
+Foo.singleton_methods.grep(/foo_method/)   # => ["foo_method"]
+Foo.instance_methods.grep(/foo_method/)    # => ["foo_method"]
+
+Foo.foo_method                             # => "foo_method"
+
+
+module Bar
+
+  # extend self なし
+
+  def bar_method
+    'bar_method'
+  end
+
+end
+
+Bar.singleton_methods.grep(/bar_method/)   # => []
+Bar.instance_methods.grep(/bar_method/)    # => ["bar_method"]
+
+Bar.bar_method                             # => undefined method `bar_method' for Bar:Module (NoMethodError)
+
+
